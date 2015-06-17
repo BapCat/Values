@@ -72,6 +72,13 @@ class StringTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('This is', $string->substring(0, 7)->value());
   }
   
+  public function testConcat() {
+    $s1 = new String('a ');
+    $s2 = new String('test');
+    
+    $this->assertEquals('a test', $s1->concat($s2)->value());
+  }
+  
   public function testTrim() {
     $string = new String('  test    ');
     
@@ -94,5 +101,13 @@ class StringTest extends PHPUnit_Framework_TestCase {
     $string = new String('tEsT');
     
     $this->assertEquals('test', $string->toLowerCase()->value());
+  }
+  
+  public function testReplace() {
+    $string  = new String('Replace me');
+    $search  = new String('me');
+    $replace = new String('yourself');
+    
+    $this->assertEquals('Replace yourself', $string->replace($search, $replace));
   }
 }

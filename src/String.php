@@ -57,6 +57,10 @@ class String extends Value {
     return new static(substr($this->value(), $start, $length));
   }
   
+  public function concat(String $other) {
+    return new static($this->value() . $other->value());
+  }
+  
   public function trim() {
     return new static(trim($this->value()));
   }
@@ -71,5 +75,9 @@ class String extends Value {
   
   public function toLowerCase() {
     return new static(strtolower($this->value()));
+  }
+  
+  public function replace(String $search, String $replace) {
+    return new static(str_replace($search->value(), $replace->value(), $this->value()));
   }
 }
