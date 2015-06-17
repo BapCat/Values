@@ -6,11 +6,13 @@ use InvalidArgumentException;
 
 class String extends Value {
   public function __construct($string) {
+    parent::__construct($string);
+  }
+  
+  protected function validate($string) {
     if(!is_string($string)) {
       throw new InvalidArgumentException("Expected string, but got [$string] instead");
     }
-    
-    parent::__construct($string);
   }
   
   public function __toString() {

@@ -8,11 +8,7 @@ class Email extends Value {
   private $local  = null;
   private $domain = null;
   
-  public function __construct(String $email) {
-    if(filter_var($email->value(), FILTER_VALIDATE_EMAIL) === false) {
-      throw new InvalidArgumentException("Expected email address, but got [$email] instead");
-    }
-    
+  public function __construct($email) {
     parent::__construct($email);
     
     $parts = explode('@', $this->value());
@@ -20,8 +16,14 @@ class Email extends Value {
     $this->local  = new String(implode('@', $parts));
   }
   
+  protected function validate($email) {
+    if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
+      throw new InvalidArgumentException("Expected email address, but got [$email] instead");
+    }
+  }
+  
   public function __toString() {
-    return (string)$this->value();
+    return $this->value();
   }
   
   public function getLocal() {

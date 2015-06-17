@@ -10,14 +10,10 @@ class Ip extends Value {
   private $local   = false;
   private $private = false;
   
-  public function __construct(String $ip) {
-    if(filter_var($ip->value(), FILTER_VALIDATE_IP) === false) {
-      throw new InvalidArgumentException("Expected IP, but got [$ip] instead");
-    }
+  public function __construct($ip) {
+    parent::__construct($ip);
     
-    $dec = ip2long($ip->value());
-    
-    parent::__construct($dec);
+    $dec = ip2long($ip);
     
     $octets = array_map(function($val) {
       if($val < 0) {
@@ -62,9 +58,10 @@ class Ip extends Value {
     }
   }
   
-  /** @override */
-  public function value() {
-    return long2ip(parent::value());
+  protected function validate($ip) {
+    if(filter_var($ip, FILTER_VALIDATE_IP) === false) {
+      throw new InvalidArgumentException("Expected IP, but got [$ip] instead");
+    }
   }
   
   public function __toString() {
@@ -92,7 +89,7 @@ class Ip extends Value {
   }
   
   public function asInteger() {
-    return parent::value();
+    return ip2long($this->value());
   }
   
   public function asDottedDecimal() {
