@@ -25,7 +25,7 @@ class Ip extends Value {
       ($dec & 0xFF000000) >> 24,
       ($dec & 0x00FF0000) >> 16,
       ($dec & 0x0000FF00) >>  8,
-      ($dec & 0x000000FF)
+      ($dec & 0x000000FF) >>  0,
     ]);
     
     $this->octets = $octets;

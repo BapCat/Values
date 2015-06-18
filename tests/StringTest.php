@@ -65,6 +65,18 @@ class StringTest extends PHPUnit_Framework_TestCase {
     $this->assertFalse($isA->contains($string));
   }
   
+  public function testMatches() {
+    $regex = $this->getMockBuilder('BapCat\Values\Regex')
+      ->disableOriginalConstructor()
+      ->getMock();
+    
+    $regex->method('check')
+      ->willReturn(true);
+    
+    $string = new String('This is a test');
+    $this->assertTrue($string->matches($regex));
+  }
+  
   public function testSubstring() {
     $string = new String('This is a test');
     

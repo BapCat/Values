@@ -10,7 +10,7 @@ class Regex extends Value {
   }
   
   protected function validate($regex) {
-    if(preg_match($regex, null) === false) {
+    if(@preg_match($regex, null) === false) {
       throw new InvalidArgumentException("Expected regex, but got [$regex] instead");
     }
   }
