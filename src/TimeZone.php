@@ -2,6 +2,9 @@
 
 use BapCat\Interfaces\Values\Value;
 
+use DateTimeZone;
+use DateTime;
+
 use InvalidArgumentException;
 
 class TimeZone extends Value {
@@ -21,6 +24,10 @@ class TimeZone extends Value {
     if(!in_array($zone, DateTimeZone::listIdentifiers())) {
       throw new InvalidArgumentException("Expected timezone, but got [$zone] instead");
     }
+  }
+  
+  public function __toString() {
+    return $this->value();
   }
   
   public function getName() {
