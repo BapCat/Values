@@ -47,6 +47,10 @@ class String extends Value {
     return strpos($this->value(), $other->value()) !== false;
   }
   
+  public function matches(Regex $regex) {
+    return $regex->check($this);
+  }
+  
   /*
    * Methods
    */
