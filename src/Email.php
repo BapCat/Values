@@ -9,21 +9,20 @@ class Email extends Value {
   private $domain = null;
   
   public function __construct($email) {
-    parent::__construct($email);
-    
-    $parts = explode('@', $this->value());
+    $this->validate($email);
+    $parts = explode('@', $email);
     $this->domain = new String(array_pop($parts));
     $this->local  = new String(implode('@', $parts));
   }
   
-  protected function validate($email) {
+  private function validate($email) {
     if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
       throw new InvalidArgumentException("Expected email address, but got [$email] instead");
     }
   }
   
   public function __toString() {
-    return $this->value();
+    return (string)$this->local . '@' . (string)$this->domain;
   }
   
   public function getLocal() {

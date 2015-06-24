@@ -5,15 +5,16 @@ use BapCat\Interfaces\Values\Value;
 use InvalidArgumentException;
 
 class Ip extends Value {
+  private $dec;
   private $octets  = [0, 0, 0, 0];
   private $class   = null;
   private $local   = false;
   private $private = false;
   
   public function __construct($ip) {
-    parent::__construct($ip);
+    $this->validate($ip);
     
-    $dec = ip2long($ip);
+    $this->dec = ip2long($ip);
     
     $octets = array_map(function($val) {
       if($val < 0) {
@@ -22,10 +23,10 @@ class Ip extends Value {
       
       return $val;
     }, [
-      ($dec & 0xFF000000) >> 24,
-      ($dec & 0x00FF0000) >> 16,
-      ($dec & 0x0000FF00) >>  8,
-      ($dec & 0x000000FF) >>  0,
+      ($this->dec & 0xFF000000) >> 24,
+      ($this->dec & 0x00FF0000) >> 16,
+      ($this->dec & 0x0000FF00) >>  8,
+      ($this->dec & 0x000000FF) >>  0,
     ]);
     
     $this->octets = $octets;
@@ -58,14 +59,14 @@ class Ip extends Value {
     }
   }
   
-  protected function validate($ip) {
+  private function validate($ip) {
     if(filter_var($ip, FILTER_VALIDATE_IP) === false) {
       throw new InvalidArgumentException("Expected IP, but got [$ip] instead");
     }
   }
   
   public function __toString() {
-    return $this->value();
+    return $this->asDottedDecimal();
   }
   
   public function getOctet($index) {
@@ -89,10 +90,10 @@ class Ip extends Value {
   }
   
   public function asInteger() {
-    return ip2long($this->value());
+    return $this->dec;
   }
   
   public function asDottedDecimal() {
-    return $this->value();
+    return long2ip($this->dec);
   }
 }

@@ -13,7 +13,6 @@ class TimeZoneTest extends PHPUnit_Framework_TestCase {
   public function testValid() {
     $value = 'America/Halifax';
     $tz = new TimeZone($value);
-    $this->assertEquals($value, $tz->value());
     $this->assertEquals($value, (string)$tz);
     $this->assertEquals($value, $tz->getName());
     $this->assertEquals(-3, $tz->getOffset() / 3600);

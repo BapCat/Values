@@ -5,21 +5,24 @@ use BapCat\Interfaces\Values\Value;
 use InvalidArgumentException;
 
 class Regex extends Value {
+  private $raw;
+  
   public function __construct($regex) {
-    parent::__construct($regex);
+    $this->validate($regex);
+    $this->raw = $regex;
   }
   
-  protected function validate($regex) {
+  private function validate($regex) {
     if(@preg_match($regex, null) === false) {
       throw new InvalidArgumentException("Expected regex, but got [$regex] instead");
     }
   }
   
   public function __toString() {
-    return $this->value();
+    return $this->raw;
   }
   
   public function check(String $string) {
-    return preg_match($this->value(), $string->value()) === 1;
+    return preg_match($this->raw, (string)$string) === 1;
   }
 }

@@ -16,7 +16,6 @@ class EmailTest extends PHPUnit_Framework_TestCase {
   public function testValid() {
     $valid = 'corey@example.com';
     $email = new Email($valid);
-    $this->assertEquals($valid, $email->value());
     $this->assertEquals($valid, (string)$email);
   }
   

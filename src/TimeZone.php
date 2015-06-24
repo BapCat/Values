@@ -8,11 +8,11 @@ use DateTime;
 use InvalidArgumentException;
 
 class TimeZone extends Value {
-  private $name = null;
-  private $offset = 0;
+  private $name;
+  private $offset;
   
   public function __construct($zone) {
-    parent::__construct($zone);
+    $this->validate($zone);
     
     $this->name = new String($zone);
     
@@ -20,14 +20,14 @@ class TimeZone extends Value {
     $this->offset = $timezone->getOffset(new DateTime());
   }
   
-  protected function validate($zone) {
+  private function validate($zone) {
     if(!in_array($zone, DateTimeZone::listIdentifiers())) {
       throw new InvalidArgumentException("Expected timezone, but got [$zone] instead");
     }
   }
   
   public function __toString() {
-    return $this->value();
+    return (string)$this->name;
   }
   
   public function getName() {

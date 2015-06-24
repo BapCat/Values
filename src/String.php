@@ -5,18 +5,21 @@ use BapCat\Interfaces\Values\Value;
 use InvalidArgumentException;
 
 class String extends Value {
+  private $raw;
+  
   public function __construct($string) {
-    parent::__construct($string);
+    $this->validate($string);
+    $this->raw = $string;
   }
   
-  protected function validate($string) {
+  private function validate($string) {
     if(!is_string($string)) {
       throw new InvalidArgumentException("Expected string, but got [$string] instead");
     }
   }
   
   public function __toString() {
-    return $this->value();
+    return $this->raw;
   }
   
   /*
@@ -24,7 +27,7 @@ class String extends Value {
    */
   
   public function length() {
-    return strlen($this->value());
+    return strlen($this->raw);
   }
   
   public function isEmpty() {
@@ -32,19 +35,19 @@ class String extends Value {
   }
   
   public function equals(String $other) {
-    return $this->value() == $other->value();
+    return $this->raw == (string)$other;
   }
   
   public function startsWith(String $other) {
-    return strpos($this->value(), $other->value()) === 0;
+    return strpos($this->raw, (string)$other) === 0;
   }
   
   public function endsWith(String $other) {
-    return strrpos($this->value(), $other->value(), -$other->length()) === ($this->length() - $other->length());
+    return strrpos($this->raw, (string)$other, -$other->length()) === ($this->length() - $other->length());
   }
   
   public function contains(String $other) {
-    return strpos($this->value(), $other->value()) !== false;
+    return strpos($this->raw, (string)$other) !== false;
   }
   
   public function matches(Regex $regex) {
@@ -57,33 +60,33 @@ class String extends Value {
   
   public function substring($start, $length = null) {
     if($length === null) {
-      return new static(substr($this->value(), $start));
+      return new static(substr($this->raw, $start));
     }
     
-    return new static(substr($this->value(), $start, $length));
+    return new static(substr($this->raw, $start, $length));
   }
   
   public function concat(String $other) {
-    return new static($this->value() . $other->value());
+    return new static($this->raw . (string)$other);
   }
   
   public function trim() {
-    return new static(trim($this->value()));
+    return new static(trim($this->raw));
   }
   
   public function pad($length) {
-    return new static(str_pad($this->value(), $length));
+    return new static(str_pad($this->raw, $length));
   }
   
   public function toUpperCase() {
-    return new static(strtoupper($this->value()));
+    return new static(strtoupper($this->raw));
   }
   
   public function toLowerCase() {
-    return new static(strtolower($this->value()));
+    return new static(strtolower($this->raw));
   }
   
   public function replace(String $search, String $replace) {
-    return new static(str_replace($search->value(), $replace->value(), $this->value()));
+    return new static(str_replace((string)$search, (string)$replace, $this->raw));
   }
 }

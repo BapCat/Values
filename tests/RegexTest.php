@@ -7,7 +7,6 @@ class RegexTest extends PHPUnit_Framework_TestCase {
   public function testValid() {
     $value = '/[a-z]/';
     $regex = new Regex($value);
-    $this->assertEquals($value, $regex->value());
     $this->assertEquals($value, (string)$regex);
   }
   

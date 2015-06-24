@@ -28,7 +28,6 @@ class IpTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals(3, $ip->getOctet(2));
     $this->assertEquals(4, $ip->getOctet(3));
     $this->assertEquals($raw, $ip->asDottedDecimal());
-    $this->assertEquals($raw, $ip->value());
     $this->assertEquals($raw, (string)$ip);
     $this->assertEquals(ip2long($raw), $ip->asInteger());
   }

@@ -6,7 +6,6 @@ class StringTest extends PHPUnit_Framework_TestCase {
   public function testString() {
     $value = 'test';
     $string = new String($value);
-    $this->assertEquals($value, $string->value());
     $this->assertEquals($value, (string)$string);
   }
   
@@ -80,39 +79,39 @@ class StringTest extends PHPUnit_Framework_TestCase {
   public function testSubstring() {
     $string = new String('This is a test');
     
-    $this->assertEquals('test', $string->substring(10)->value());
-    $this->assertEquals('This is', $string->substring(0, 7)->value());
+    $this->assertEquals('test', (string)$string->substring(10));
+    $this->assertEquals('This is', (string)$string->substring(0, 7));
   }
   
   public function testConcat() {
     $s1 = new String('a ');
     $s2 = new String('test');
     
-    $this->assertEquals('a test', $s1->concat($s2)->value());
+    (string)$this->assertEquals('a test', $s1->concat($s2));
   }
   
   public function testTrim() {
     $string = new String('  test    ');
     
-    $this->assertEquals('test', $string->trim()->value());
+    $this->assertEquals('test', (string)$string->trim());
   }
   
   public function testPad() {
     $string = new String('test');
     
-    $this->assertEquals('test  ', $string->pad(6)->value());
+    $this->assertEquals('test  ', (string)$string->pad(6));
   }
   
   public function testToUpperCase() {
     $string = new String('tEsT');
     
-    $this->assertEquals('TEST', $string->toUpperCase()->value());
+    $this->assertEquals('TEST', (string)$string->toUpperCase());
   }
   
   public function testToLowerCase() {
     $string = new String('tEsT');
     
-    $this->assertEquals('test', $string->toLowerCase()->value());
+    $this->assertEquals('test', (string)$string->toLowerCase());
   }
   
   public function testReplace() {
