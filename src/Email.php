@@ -5,8 +5,8 @@ use BapCat\Interfaces\Values\Value;
 use InvalidArgumentException;
 
 class Email extends Value {
-  private $local  = null;
-  private $domain = null;
+  private $local;
+  private $domain;
   
   public function __construct($email) {
     $this->validate($email);
@@ -25,11 +25,11 @@ class Email extends Value {
     return (string)$this->local . '@' . (string)$this->domain;
   }
   
-  public function getLocal() {
+  protected function getLocalPart() {
     return $this->local;
   }
   
-  public function getDomain() {
+  protected function getDomainPart() {
     return $this->domain;
   }
 }

@@ -5,50 +5,49 @@ use BapCat\Interfaces\Values\Value;
 use InvalidArgumentException;
 
 class Time extends Value {
+  private $hour;
+  private $min;
+  private $sec;
+  
   public function __construct($hour, $min, $sec) {
-    parent::__construct([$hour, $min, $sec]);
+    $this->validate($hour, $min, $sec);
+    
+    $this->hour = $hour;
+    $this->min  = $min;
+    $this->sec  = $sec;
   }
   
-  protected function validate($time) {
-    list($hour, $min, $sec) = $time;
-    
-    if(!is_int($hour) || $hour < 0 || $hour > 23) {
-      throw new InvalidArgumentException("Expected hour but got [$hour]");
+  private function validate($time) {
+    if(!is_int($this->hour) || $this->hour < 0 || $this->hour > 23) {
+      throw new InvalidArgumentException("Expected hour but got [{$this->hour}]");
     }
     
-    if(!is_int($min) || $min < 0 || $min > 59) {
-      throw new InvalidArgumentException("Expected minute but got [$min]");
+    if(!is_int($this->min) || $this->min < 0 || $this->min > 59) {
+      throw new InvalidArgumentException("Expected minute but got [{$this->$min}]");
     }
     
-    if(!is_int($sec) || $sec < 0 || $sec > 59) {
-      throw new InvalidArgumentException("Expected second but got [$sec]");
+    if(!is_int($this->sec) || $this->sec < 0 || $this->sec > 59) {
+      throw new InvalidArgumentException("Expected second but got [{$this->$sec}]");
     }
-  }
-  
-  /** @override */
-  public function value() {
-    list($hour, $min, $sec) = parent::value();
-    
-    return
-      str_pad($hour, 2, '0', STR_PAD_LEFT) . ':' .
-      str_pad($min,  2, '0', STR_PAD_LEFT) . ':' .
-      str_pad($sec,  2, '0', STR_PAD_LEFT)
-    ;
   }
   
   public function __toString() {
-    return $this->value();
+    return
+      str_pad($this->hour, 2, '0', STR_PAD_LEFT) . ':' .
+      str_pad($this->min,  2, '0', STR_PAD_LEFT) . ':' .
+      str_pad($this->sec,  2, '0', STR_PAD_LEFT)
+    ;
   }
   
-  public function getHour() {
-    return parent::value()[0];
+  protected function getHour() {
+    return $this->hour;
   }
   
-  public function getMinutes() {
-    return parent::value()[1];
+  protected function getMinutes() {
+    return $this->min;
   }
   
-  public function getSeconds() {
-    return parent::value()[2];
+  protected function getSeconds() {
+    return $this->sec;
   }
 }

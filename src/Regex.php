@@ -25,4 +25,14 @@ class Regex extends Value {
   public function check(String $string) {
     return preg_match($this->raw, (string)$string) === 1;
   }
+  
+  public function matches(String $string) {
+    $result = preg_match_all($this->raw, (string)$string, $matches, PREG_SET_ORDER);
+    
+    foreach($matches as &$match) {
+      array_shift($match);
+    }
+    
+    return $matches;
+  }
 }
