@@ -1,5 +1,6 @@
 <?php
 
+use BapCat\Values\Regex;
 use BapCat\Values\String;
 
 class StringTest extends PHPUnit_Framework_TestCase {
@@ -122,13 +123,23 @@ class StringTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('Replace yourself', $string->replace($search, $replace));
   }
   
-  public function testSplit() {
+  public function testSplitByString() {
     $string = new String('Split me up');
     $delim  = new String(' ');
     $parts  = $string->split($delim);
     
     $this->assertEquals([
-      'Split', 'me', 'up'
+      new String('Split'), new String('me'), new String('up')
+    ], $parts);
+  }
+  
+  public function testSplitByRegex() {
+    $string = new String('Split   me         up');
+    $delim  = new Regex('#\s+#');
+    $parts  = $string->split($delim);
+    
+    $this->assertEquals([
+      new String('Split'), new String('me'), new String('up')
     ], $parts);
   }
 }

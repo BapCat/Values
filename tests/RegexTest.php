@@ -40,4 +40,26 @@ class RegexTest extends PHPUnit_Framework_TestCase {
       ['Uint',   'asdf', 'Something different']
     ], $matches);
   }
+  
+  public function testSplit() {
+    $pattern = '#\s+#';
+    $regex   = new Regex($pattern);
+    $string  = new String('Split me       up');
+    
+    $parts = $regex->split($string);
+    
+    $this->assertEquals([
+      new String('Split'), new String('me'), new String('up')
+    ], $parts);
+  }
+  
+  public function testSplitNoResults() {
+    $pattern = '#\s+#';
+    $regex   = new Regex($pattern);
+    $string  = new String('Splitmeup');
+    
+    $parts = $regex->split($string);
+    
+    $this->assertEquals([$string], $parts);
+  }
 }

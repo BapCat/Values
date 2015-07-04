@@ -4,7 +4,7 @@ use BapCat\Interfaces\Values\Value;
 
 use InvalidArgumentException;
 
-class Regex extends Value {
+class Regex extends Value implements StringOrRegex {
   private $raw;
   
   public function __construct($regex) {
@@ -31,8 +31,14 @@ class Regex extends Value {
     
     foreach($matches as &$match) {
       array_shift($match);
+      
+      $match = $string->fromArray($match);
     }
     
     return $matches;
+  }
+  
+  public function split(String $string) {
+    return $string->fromArray(preg_split($this->raw, (string)$string));
   }
 }

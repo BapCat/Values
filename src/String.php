@@ -4,8 +4,14 @@ use BapCat\Interfaces\Values\Value;
 
 use InvalidArgumentException;
 
-class String extends Value {
+class String extends Value implements StringOrRegex {
   private $raw;
+  
+  public static function fromArray(array $strings) {
+    return array_map(function($string) {
+      return new static($string);
+    }, $strings);
+  }
   
   public function __construct($string) {
     $this->validate($string);
@@ -90,7 +96,11 @@ class String extends Value {
     return new static(str_replace((string)$search, (string)$replace, $this->raw));
   }
   
-  public function split(String $delimiter) {
-    return explode((string)$delimiter, $this->raw);
+  public function split(StringOrRegex $delimiter) {
+    if($delimiter instanceof String) {
+      return static::fromArray(explode((string)$delimiter, $this->raw));
+    } else {
+      return $delimiter->split($this);
+    }
   }
 }
