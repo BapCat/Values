@@ -89,4 +89,8 @@ class String extends Value {
   public function replace(String $search, String $replace) {
     return new static(str_replace((string)$search, (string)$replace, $this->raw));
   }
+  
+  public function split(String $delimiter) {
+    return explode((string)$delimiter, $this->raw);
+  }
 }

@@ -121,4 +121,14 @@ class StringTest extends PHPUnit_Framework_TestCase {
     
     $this->assertEquals('Replace yourself', $string->replace($search, $replace));
   }
+  
+  public function testSplit() {
+    $string = new String('Split me up');
+    $delim  = new String(' ');
+    $parts  = $string->split($delim);
+    
+    $this->assertEquals([
+      'Split', 'me', 'up'
+    ], $parts);
+  }
 }
