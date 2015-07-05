@@ -40,7 +40,11 @@ class String extends Value implements StringOrRegex {
     return $this->length() == 0;
   }
   
-  public function equals(String $other) {
+  public function equals(String $other = null) {
+    if($other === null) {
+      return false;
+    }
+    
     return $this->raw == (string)$other;
   }
   
