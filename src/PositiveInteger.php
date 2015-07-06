@@ -13,7 +13,7 @@ class PositiveInteger extends Value {
   }
   
   private function validate($positive) {
-    if(filter_var($inputVal, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) === false) {
+    if(filter_var($positive, FILTER_VALIDATE_INT, ['options' => ['min_range' => 0]]) === false) {
       throw new InvalidArgumentException("Expected a positive integer, but got [$positive] instead");
     }
   }
