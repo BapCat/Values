@@ -26,7 +26,7 @@ class Regex extends Value implements StringOrRegex {
     return preg_match($this->raw, (string)$string) === 1;
   }
   
-  public function matches(String $string) {
+  public function capture(String $string) {
     $result = preg_match_all($this->raw, (string)$string, $matches, PREG_SET_ORDER);
     
     foreach($matches as &$match) {
