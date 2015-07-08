@@ -24,7 +24,7 @@ class RegexTest extends PHPUnit_Framework_TestCase {
     $this->assertTrue($regex->check(new String('as1df')));
   }
   
-  public function testMatches() {
+  public function testCapture() {
     $pattern = '#@param[ \t]+?(\w+)[ \t]+?\$(\w+)[ \t]+(.+)#';
     $regex = new Regex($pattern);
     
@@ -33,12 +33,12 @@ class RegexTest extends PHPUnit_Framework_TestCase {
       "@param Uint   \$asdf Something different"
     );
     
-    $matches = $regex->matches($string);
+    $capture = $regex->capture($string);
     
     $this->assertEquals([
       ['String', 'test', 'This is a description'],
       ['Uint',   'asdf', 'Something different']
-    ], $matches);
+    ], $capture);
   }
   
   public function testSplit() {
