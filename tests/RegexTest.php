@@ -1,7 +1,7 @@
 <?php
 
 use BapCat\Values\Regex;
-use BapCat\Values\String;
+use BapCat\Values\Text;
 
 class RegexTest extends PHPUnit_Framework_TestCase {
   public function testValid() {
@@ -20,46 +20,46 @@ class RegexTest extends PHPUnit_Framework_TestCase {
   public function testCheck() {
     $value = '/[a-z]/';
     $regex = new Regex($value);
-    $this->assertTrue($regex->check(new String('asdf')));
-    $this->assertTrue($regex->check(new String('as1df')));
+    $this->assertTrue($regex->check(new Text('asdf')));
+    $this->assertTrue($regex->check(new Text('as1df')));
   }
   
   public function testCapture() {
     $pattern = '#@param[ \t]+?(\w+)[ \t]+?\$(\w+)[ \t]+(.+)#';
     $regex = new Regex($pattern);
     
-    $string = new String(
-      "@param String \$test This is a description\n" .
-      "@param Uint   \$asdf Something different"
+    $text = new Text(
+      "@param Text \$test This is a description\n" .
+      "@param Uint \$asdf Something different"
     );
     
-    $capture = $regex->capture($string);
+    $capture = $regex->capture($text);
     
     $this->assertEquals([
-      ['String', 'test', 'This is a description'],
-      ['Uint',   'asdf', 'Something different']
+      ['Text', 'test', 'This is a description'],
+      ['Uint', 'asdf', 'Something different']
     ], $capture);
   }
   
   public function testSplit() {
     $pattern = '#\s+#';
     $regex   = new Regex($pattern);
-    $string  = new String('Split me       up');
+    $text  = new Text('Split me       up');
     
-    $parts = $regex->split($string);
+    $parts = $regex->split($text);
     
     $this->assertEquals([
-      new String('Split'), new String('me'), new String('up')
+      new Text('Split'), new Text('me'), new Text('up')
     ], $parts);
   }
   
   public function testSplitNoResults() {
     $pattern = '#\s+#';
     $regex   = new Regex($pattern);
-    $string  = new String('Splitmeup');
+    $text  = new Text('Splitmeup');
     
-    $parts = $regex->split($string);
+    $parts = $regex->split($text);
     
-    $this->assertEquals([$string], $parts);
+    $this->assertEquals([$text], $parts);
   }
 }

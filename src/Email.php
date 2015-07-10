@@ -11,8 +11,10 @@ class Email extends Value {
   public function __construct($email) {
     $this->validate($email);
     $parts = explode('@', $email);
-    $this->domain = new String(array_pop($parts));
-    $this->local  = new String(implode('@', $parts));
+    
+    //TODO: This probably shouldn't be text
+    $this->domain = new Text(array_pop($parts));
+    $this->local  = new Text(implode('@', $parts));
   }
   
   private function validate($email) {

@@ -14,7 +14,7 @@ class TimeZone extends Value {
   public function __construct($zone) {
     $this->validate($zone);
     
-    $this->name = new String($zone);
+    $this->name = new Text($zone);
     
     $timezone = new DateTimeZone($zone);
     $this->offset = $timezone->getOffset(new DateTime());

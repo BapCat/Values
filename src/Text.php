@@ -4,7 +4,7 @@ use BapCat\Interfaces\Values\Value;
 
 use InvalidArgumentException;
 
-class String extends Value implements StringOrRegex {
+class Text extends Value {
   private $raw;
   
   public static function fromArray(array $strings) {
@@ -40,7 +40,7 @@ class String extends Value implements StringOrRegex {
     return $this->length() == 0;
   }
   
-  public function equals(String $other = null) {
+  public function equals(Text $other = null) {
     if($other === null) {
       return false;
     }
@@ -48,15 +48,15 @@ class String extends Value implements StringOrRegex {
     return $this->raw == (string)$other;
   }
   
-  public function startsWith(String $other) {
+  public function startsWith(Text $other) {
     return strpos($this->raw, (string)$other) === 0;
   }
   
-  public function endsWith(String $other) {
+  public function endsWith(Text $other) {
     return strrpos($this->raw, (string)$other, -$other->length()) === ($this->length() - $other->length());
   }
   
-  public function contains(String $other) {
+  public function contains(Text $other) {
     return strpos($this->raw, (string)$other) !== false;
   }
   
@@ -76,7 +76,7 @@ class String extends Value implements StringOrRegex {
     return new static(substr($this->raw, $start, $length));
   }
   
-  public function concat(String $other) {
+  public function concat(Text $other) {
     return new static($this->raw . (string)$other);
   }
   
@@ -96,15 +96,11 @@ class String extends Value implements StringOrRegex {
     return new static(strtolower($this->raw));
   }
   
-  public function replace(String $search, String $replace) {
+  public function replace(Text $search, Text $replace) {
     return new static(str_replace((string)$search, (string)$replace, $this->raw));
   }
   
-  public function split(StringOrRegex $delimiter) {
-    if($delimiter instanceof String) {
-      return static::fromArray(explode((string)$delimiter, $this->raw));
-    } else {
-      return $delimiter->split($this);
-    }
+  public function split(Text $delimiter) {
+    return static::fromArray(explode((string)$delimiter, $this->raw));
   }
 }
