@@ -21,4 +21,12 @@ class Boolean extends Value {
   protected function getRaw() {
     return $this->raw;
   }
+  
+  protected function getTrue() {
+    return $this->raw;
+  }
+  
+  protected function getFalse() {
+    return !$this->raw;
+  }
 }
