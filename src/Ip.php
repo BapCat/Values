@@ -21,6 +21,10 @@ class Ip extends Value {
     return $this->asReadable();
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   public function asBinary() {
     return $this->raw;
   }

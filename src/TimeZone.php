@@ -30,6 +30,10 @@ class TimeZone extends Value {
     return (string)$this->name;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   public function getName() {
     return $this->name;
   }

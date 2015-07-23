@@ -22,6 +22,10 @@ class Regex extends Value {
     return $this->raw;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   public function check(Text $string) {
     return preg_match($this->raw, (string)$string) === 1;
   }

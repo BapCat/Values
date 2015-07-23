@@ -27,6 +27,10 @@ class Email extends Value {
     return (string)$this->local . '@' . (string)$this->domain;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   protected function getLocalPart() {
     return $this->local;
   }

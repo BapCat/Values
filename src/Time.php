@@ -39,6 +39,10 @@ class Time extends Value {
     ;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   protected function getHour() {
     return $this->hour;
   }

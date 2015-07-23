@@ -28,6 +28,10 @@ class Text extends Value {
     return $this->raw;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   /*
    * Properties
    */

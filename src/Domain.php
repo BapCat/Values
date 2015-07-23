@@ -27,4 +27,8 @@ class Domain extends Value {
     
     return $full;
   }
+  
+  protected function getRaw() {
+    return (string)$this;
+  }
 }

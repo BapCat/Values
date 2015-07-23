@@ -12,4 +12,8 @@ abstract class Identifier extends Value {
   public function id() {
     return $this->id;
   }
+  
+  protected function getRaw() {
+    return $this->id;
+  }
 }

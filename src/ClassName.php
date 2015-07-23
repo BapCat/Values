@@ -17,6 +17,10 @@ class ClassName {
     return $this->name;
   }
   
+  protected function getRaw() {
+    return (string)$this;
+  }
+  
   private function validate($name) {
     try {
       new ReflectionClass($name);
