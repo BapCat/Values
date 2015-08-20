@@ -4,12 +4,12 @@ use BapCat\Values\Email;
 
 class EmailTest extends PHPUnit_Framework_TestCase {
   public function testInvalid() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $email = new Email('invalid');
   }
   
   public function testEmpty() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $email = new Email('');
   }
   
@@ -17,6 +17,18 @@ class EmailTest extends PHPUnit_Framework_TestCase {
     $valid = 'corey@example.com';
     $email = new Email($valid);
     $this->assertEquals($valid, (string)$email);
+  }
+  
+  public function testToString() {
+    $valid = 'corey@example.com';
+    $email = new Email($valid);
+    $this->assertEquals($valid, (string)$email);
+  }
+  
+  public function testRaw() {
+    $valid = 'corey@example.com';
+    $email = new Email($valid);
+    $this->assertEquals($valid, $email->raw);
   }
   
   public function testLocal() {

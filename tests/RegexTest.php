@@ -11,10 +11,22 @@ class RegexTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testInvalid() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     
     $value = '/a-z)/';
     $regex = new Regex($value);
+  }
+  
+  public function testToString() {
+    $value = '/[a-z]/';
+    $regex = new Regex($value);
+    $this->assertEquals($value, (string)$regex);
+  }
+  
+  public function testRaw() {
+    $value = '/[a-z]/';
+    $regex = new Regex($value);
+    $this->assertEquals($value, $regex->raw);
   }
   
   public function testCheck() {

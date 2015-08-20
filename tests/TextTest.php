@@ -11,10 +11,22 @@ class TextTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testInvalid() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     
     $value = true;
     new Text($value);
+  }
+  
+  public function testToString() {
+    $value = 'test';
+    $text = new Text($value);
+    $this->assertEquals($value, (string)$text);
+  }
+  
+  public function testRaw() {
+    $value = 'test';
+    $text = new Text($value);
+    $this->assertEquals($value, $text->raw);
   }
   
   public function testEquals() {
@@ -24,19 +36,20 @@ class TextTest extends PHPUnit_Framework_TestCase {
     $t2 = new Text($value);
     
     $this->assertTrue($t1->equals($t2));
+    $this->assertFalse($t1->equals(null));
   }
   
   public function testLength() {
     $text = new Text('test');
-    $this->assertEquals(4, $text->length());
+    $this->assertEquals(4, $text->length);
   }
   
   public function testIsEmpty() {
     $text  = new Text('test');
     $empty = new Text('');
     
-    $this->assertFalse($text->isEmpty());
-    $this->assertTrue($empty->isEmpty());
+    $this->assertFalse($text->is_empty);
+    $this->assertTrue($empty->is_empty);
   }
   
   public function testStartsWith() {
@@ -66,7 +79,7 @@ class TextTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testMatches() {
-    $regex = $this->getMockBuilder('BapCat\Values\Regex')
+    $regex = $this->getMockBuilder(Regex::class)
       ->disableOriginalConstructor()
       ->getMock();
     

@@ -8,8 +8,20 @@ class ClassNameTest extends PHPUnit_Framework_TestCase {
   }
   
   public function testInvalidClass() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $class = new ClassName('This\Is\An\Invalid\Class');
+  }
+  
+  public function testToString() {
+    $value = ClassName::class;
+    $class = new ClassName($value);
+    $this->assertEquals($value, (string)$class);
+  }
+  
+  public function testRaw() {
+    $value = ClassName::class;
+    $class = new ClassName($value);
+    $this->assertEquals($value, $class->raw);
   }
   
   public function testReflect() {

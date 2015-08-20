@@ -5,18 +5,30 @@ use BapCat\Values\IpClass;
 
 class IpTest extends PHPUnit_Framework_TestCase {
   public function testEmpty() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $ip = new Ip('');
   }
   
   public function testMalformed() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $ip = new Ip('1.0.0');
   }
   
   public function testInvalid() {
-    $this->setExpectedException('InvalidArgumentException');
+    $this->setExpectedException(InvalidArgumentException::class);
     $ip = new Ip('A');
+  }
+  
+  public function testToString() {
+    $value = '127.0.0.1';
+    $ip = new Ip($value);
+    $this->assertEquals($value, (string)$ip);
+  }
+  
+  public function testRaw() {
+    $value = '127.0.0.1';
+    $ip = new Ip($value);
+    $this->assertEquals($value, $ip->raw);
   }
   
   public function testIPv4() {
