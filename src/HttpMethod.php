@@ -8,7 +8,7 @@ use Eloquent\Enumeration\AbstractEnumeration;
  * @author    Corey Frenette
  * @copyright Copyright (c) 2015, BapCat
  */
-class HttpRequestMethod extends AbstractEnumeration {
+class HttpMethod extends AbstractEnumeration {
   const OPTIONS = 'OPTIONS';
   const GET     = 'GET';
   const HEAD    = 'HEAD';
