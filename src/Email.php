@@ -70,6 +70,15 @@ class Email extends Value {
   }
   
   /**
+   * Converts this object to a json encodable-form
+   * 
+   * @return  string  A representation of this object suitable for encoding
+   */
+  public function jsonSerialize() {
+    return $this->raw;
+  }
+  
+  /**
    * Gets the raw value this object wraps
    * 
    * @return  string  The raw value this object wraps
