@@ -16,7 +16,7 @@ class HttpStatusCode extends AbstractMultiton {
   private $code;
   private $text;
   
-  private function __construct($key, $code, $text) {
+  protected function __construct($key, $code, $text) {
     parent::__construct($key);
     
     $this->code = $code;
