@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/BapCat/Values.svg?branch=0.1.0)](https://travis-ci.org/BapCat/Values)
-[![Coverage Status](https://coveralls.io/repos/BapCat/Values/badge.svg?branch=0.1.0)](https://coveralls.io/r/BapCat/Values?branch=0.1.0)
+[![Build Status](https://travis-ci.org/BapCat/Values.svg?branch=0.1.1)](https://travis-ci.org/BapCat/Values)
+[![Coverage Status](https://coveralls.io/repos/BapCat/Values/badge.svg?branch=0.1.1)](https://coveralls.io/r/BapCat/Values?branch=0.1.1)
 [![License](https://img.shields.io/packagist/l/BapCat/Values.svg)](https://img.shields.io/packagist/l/BapCat/Values.svg)
 
 # Values
