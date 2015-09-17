@@ -37,13 +37,31 @@ class Password extends Value {
    * @param  string  $name  The password to validate
    */
   private function validate($password) {
-    if(strlen($password) < 8) {
-      throw new InvalidArgumentException("The password must be at least 8 characters long");
+    if(strlen($password) < $this->validationMinLength()) {
+      throw new InvalidArgumentException("The password must be at least {$this->validationMinLength()} characters long");
     }
     
-    if(strlen($password) > 56) {
-      throw new InvalidArgumentException("The password must be no more than 56 characters long");
+    if(strlen($password) > $this->validationMaxLength()) {
+      throw new InvalidArgumentException("The password must be no more than {$this->validationMaxLength()} characters long");
     }
+  }
+  
+  /**
+   * Used for validation, the minimum length a password can be
+   * 
+   * @return  integer  The minimum password length
+   */
+  protected function validationMinLength() {
+    return 8;
+  }
+  
+  /**
+   * Used for validation, the maximum length a password can be
+   * 
+   * @return  integer  The maximum password length
+   */
+  protected function validationMaxLength() {
+    return 56; // BCrypt limitation
   }
   
   /**
