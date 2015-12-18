@@ -31,6 +31,12 @@ class EmailTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($valid, $email->raw);
   }
   
+  public function testToJson() {
+    $value = 'corey@example.com';
+    $email = new Email($value);
+    $this->assertSame(json_encode($value), json_encode($email));
+  }
+  
   public function testLocal() {
     $valid = 'corey@example.com';
     $email = new Email($valid);

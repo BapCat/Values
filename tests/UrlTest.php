@@ -33,4 +33,9 @@ class AzorusRedirectUrlTest extends PHPUnit_Framework_TestCase {
     $url = new Url($this->url);
     $this->assertEquals($this->url, $url->raw);
   }
+  
+  public function testToJson() {
+    $url = new Url($this->url);
+    $this->assertSame(json_encode($this->url), json_encode($url));
+  }
 }

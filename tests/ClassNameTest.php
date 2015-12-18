@@ -24,6 +24,12 @@ class ClassNameTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($value, $class->raw);
   }
   
+  public function testToJson() {
+    $value = ClassName::class;
+    $class = new ClassName($value);
+    $this->assertSame(json_encode($value), json_encode($class));
+  }
+  
   public function testReflect() {
     $class = new ClassName(ClassName::class);
     $this->assertInstanceOf('ReflectionClass', $class->reflect());

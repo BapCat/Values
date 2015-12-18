@@ -29,6 +29,12 @@ class TextTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($value, $text->raw);
   }
   
+  public function testToJson() {
+    $value = 'test';
+    $text = new Text($value);
+    $this->assertSame(json_encode($value), json_encode($text));
+  }
+  
   public function testEquals() {
     $value = 'test';
     

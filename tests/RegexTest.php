@@ -29,6 +29,12 @@ class RegexTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($value, $regex->raw);
   }
   
+  public function testToJson() {
+    $value = '/[a-z]/';
+    $regex = new Regex($value);
+    $this->assertSame(json_encode($value), json_encode($regex));
+  }
+  
   public function testCheck() {
     $value = '/[a-z]/';
     $regex = new Regex($value);

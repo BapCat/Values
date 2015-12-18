@@ -31,6 +31,12 @@ class IpTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals($value, $ip->raw);
   }
   
+  public function testToJson() {
+    $value = '127.0.0.1';
+    $ip = new Ip($value);
+    $this->assertSame(json_encode($value), json_encode($ip));
+  }
+  
   public function testIPv4() {
     $raw = '127.0.0.1';
     $ip = new Ip($raw);
