@@ -142,6 +142,14 @@ class TextTest extends PHPUnit_Framework_TestCase {
     $this->assertEquals('Replace yourself', $text->replace($search, $replace));
   }
   
+  public function testReplaceByRegex() {
+    $text    = new Text('Replace me');
+    $search  = new Regex('#me#');
+    $replace = new Text('yourself');
+    
+    $this->assertEquals('Replace yourself', $text->replaceByRegex($search, $replace));
+  }
+  
   public function testSplitByString() {
     $text  = new Text('Split me up');
     $delim = new Text(' ');

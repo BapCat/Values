@@ -62,7 +62,7 @@ class RegexTest extends PHPUnit_Framework_TestCase {
   public function testSplit() {
     $pattern = '#\s+#';
     $regex   = new Regex($pattern);
-    $text  = new Text('Split me       up');
+    $text    = new Text('Split me       up');
     
     $parts = $regex->split($text);
     
@@ -74,10 +74,19 @@ class RegexTest extends PHPUnit_Framework_TestCase {
   public function testSplitNoResults() {
     $pattern = '#\s+#';
     $regex   = new Regex($pattern);
-    $text  = new Text('Splitmeup');
+    $text    = new Text('Splitmeup');
     
     $parts = $regex->split($text);
     
     $this->assertEquals([$text], $parts);
+  }
+  
+  public function testReplace() {
+    $pattern  = '#replace this#';
+    $regex    = new Regex($pattern);
+    $text     = new Text('This is replace this test');
+    $replaced = $regex->replace($text, new Text('a'));
+    
+    $this->assertSame('This is a test', $replaced->raw);
   }
 }
