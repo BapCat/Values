@@ -108,4 +108,16 @@ class Regex extends Value {
   public function split(Text $text) {
     return $text->fromArray(preg_split($this->raw, (string)$text));
   }
+  
+  /**
+   * Replaces parts of a Text object based on a search and replace via this regex
+   * 
+   * @param   Text  $text     The text to replace
+   * @param   Text  $replace  The text with which to replace the found text
+   * 
+   * @return  Text  A new Text object with all search text replaced
+   */
+  public function replace(Text $text, Text $replace) {
+    return new Text(preg_replace($this->raw, $replace->raw, $text->raw));
+  }
 }

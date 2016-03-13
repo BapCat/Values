@@ -242,6 +242,18 @@ class Text extends Value {
   }
   
   /**
+   * Replaces parts of this Text object based on a search and replace via a regex
+   * 
+   * @param   Regex  $search   The regex to match
+   * @param   Text   $replace  The text with which to replace the found text
+   * 
+   * @return  Text  A new Text object containing this Text object, with all search text replaced
+   */
+  public function replaceByRegex(Regex $search, Text $replace) {
+    return $search->replace($this, $replace);
+  }
+  
+  /**
    * Splits this Text object based on another Text object
    * 
    * @param   Text  $delimiter  The Text object to split on
