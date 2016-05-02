@@ -56,7 +56,7 @@ class Email extends Value {
    */
   private function validate($email) {
     if(filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-      throw new InvalidArgumentException("Expected email address, but got [$email] instead");
+      throw new InvalidArgumentException('Expected email address, but got [' . var_export($email, true) . '] instead');
     }
   }
   

@@ -35,7 +35,7 @@ class Url extends Value {
    */
   private function validate($url) {
     if(filter_var($url, FILTER_VALIDATE_URL) === false) {
-      throw new InvalidArgumentException("Expected URL, but got [$url] instead");
+      throw new InvalidArgumentException('Expected URL, but got [' . var_export($url, true) . '] instead');
     }
   }
   

@@ -42,7 +42,7 @@ class ClassName extends Value {
     try {
       new ReflectionClass($name);
     } catch(ReflectionException $ex) {
-      throw new InvalidArgumentException("Expected class name, but got [$name] instead");
+      throw new InvalidArgumentException('Expected class name, but got [' . var_export($name, true) . '] instead');
     }
   }
   

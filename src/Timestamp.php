@@ -39,7 +39,7 @@ class Timestamp extends Value {
   private function validate($timestamp) {
     // Gotta check `is_numeric` first because `is_int` errors on non-numbers
     if(!is_numeric($timestamp) || !is_int($timestamp)) {
-      throw new InvalidArgumentException("Expected timestamp, but got [$timestamp] instead");
+      throw new InvalidArgumentException('Expected timestamp, but got [' . var_export($timestamp, true) . '] instead');
     }
   }
   

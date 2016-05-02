@@ -34,7 +34,7 @@ class Ip extends Value {
     $bin = @inet_pton($ip);
     
     if($bin === false) {
-      throw new InvalidArgumentException("Expected IP, but got [$ip] instead");
+      throw new InvalidArgumentException('Expected IP, but got [' . var_export($ip, true) . '] instead');
     }
     
     $this->raw = $ip;

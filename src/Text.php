@@ -50,7 +50,7 @@ class Text extends Value {
    */
   private function validate($string) {
     if(!is_string($string)) {
-      throw new InvalidArgumentException("Expected string, but got [$string] instead");
+      throw new InvalidArgumentException('Expected string, but got [' . var_export($string, true) . '] instead');
     }
   }
   

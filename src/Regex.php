@@ -37,7 +37,7 @@ class Regex extends Value {
    */
   private function validate($regex) {
     if(@preg_match($regex, null) === false) {
-      throw new InvalidArgumentException("Expected regex, but got [$regex] instead");
+      throw new InvalidArgumentException('Expected regex, but got [' . var_export($regex, true) . '] instead');
     }
   }
   
