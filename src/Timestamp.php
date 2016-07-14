@@ -14,33 +14,29 @@ class Timestamp extends Value {
   /**
    * The timestamp
    * 
-   * @var  int
+   * @var  int|float
    */
-  private $timestamp;
+  private $raw;
   
   /**
    * Constructor
    * 
-   * @param  int  $timestamp  The timestamp to wrap 
+   * @param  int|float  $timestamp  The timestamp to wrap
    */
   public function __construct($timestamp) {
-    $this->validate($timestamp);
-    
-    $this->timestamp = (int)$timestamp;
-  }
-  
-  /**
-   * Ensures the timestamp passed in is valid
-   * 
-   * @throws  InvalidArgumentException  If the value is not a valid class
-   * 
-   * @param  int  $timestamp  The value to validate
-   */
-  private function validate($timestamp) {
-    // Gotta check `is_numeric` first because `is_int` errors on non-numbers
-    if(!is_numeric($timestamp) || !is_int($timestamp)) {
-      throw new InvalidArgumentException('Expected timestamp, but got [' . var_export($timestamp, true) . '] instead');
+    if(is_numeric($timestamp)) {
+      if(is_int($timestamp)) {
+        $this->raw = (int)$timestamp;
+        return;
+      }
+      
+      if(is_float($timestamp)) {
+        $this->raw = (float)$timestamp;
+        return;
+      }
     }
+    
+    throw new InvalidArgumentException("Expected timestamp, but got [" . var_export($timestamp, true) . "] instead");
   }
   
   /**
@@ -64,9 +60,9 @@ class Timestamp extends Value {
   /**
    * Gets the raw value this object wraps
    * 
-   * @return  boolean  The raw value this object wraps
+   * @return  int|float  The raw value this object wraps
    */
   protected function getRaw() {
-    return $this->timestamp;
+    return $this->raw;
   }
 }
