@@ -14,6 +14,10 @@ class TimestampTest extends PHPUnit_Framework_TestCase {
     new Timestamp(null);
   }
   
+  public function testFloat() {
+    $this->assertSame(2.2, (new Timestamp(2.2))->raw);
+  }
+  
   public function testToString() {
     $value = 100;
     $ts = new Timestamp($value);
