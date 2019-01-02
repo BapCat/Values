@@ -1,15 +1,16 @@
-<?php
+<?php declare(strict_types = 1);
 
 use BapCat\Values\HttpStatusCode;
+use PHPUnit\Framework\TestCase;
 
-class HttpStatusCodeTest extends PHPUnit_Framework_TestCase {
-  public function testAllMethodsExist() {
+class HttpStatusCodeTest extends TestCase {
+  public function testAllMethodsExist(): void {
     $codes = [];
-    
+
     foreach(HttpStatusCode::members() as $status) {
       $codes[] = $status->code;
     }
-    
+
     $this->assertEmpty(array_diff([
       100, 101,
       200, 201, 202, 203, 204, 205, 206,
@@ -19,10 +20,10 @@ class HttpStatusCodeTest extends PHPUnit_Framework_TestCase {
       500, 501, 502, 503, 504, 505
     ], $codes));
   }
-  
-  public function testAccessors() {
+
+  public function testAccessors(): void {
     $status = HttpStatusCode::NOT_FOUND();
-    
+
     $this->assertSame(404, $status->code);
     $this->assertSame('Not Found', $status->text);
   }
