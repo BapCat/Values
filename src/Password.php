@@ -1,93 +1,93 @@
-<?php namespace BapCat\Values;
+<?php declare(strict_types = 1); namespace BapCat\Values;
 
 use BapCat\Interfaces\Values\Value;
 
 use InvalidArgumentException;
 
+use function strlen;
+
 /**
  * Represents a password
- * 
+ *
+ * @property-read  string  $raw
+ *
  * @author    Corey Frenette
- * @copyright Copyright (c) 2015, BapCat
+ * @copyright Copyright (c) 2019, BapCat
  */
 class Password extends Value {
-  /**
-   * The raw password
-   * 
-   * @var  string
-   */
+  /** @var  string  $raw  The raw password */
   private $raw;
-  
+
   /**
-   * Constructor
-   * 
-   * @param  string  $password  The raw password to wrap 
+   * @param  string  $password  The raw password to wrap
    */
   public function __construct($password) {
     $this->validate($password);
-    
+
     $this->raw = $password;
   }
-  
+
   /**
    * Ensures the password is valid
-   * 
+   *
    * @throws  InvalidArgumentException  If the password is not valid
-   * 
-   * @param  string  $name  The password to validate
+   *
+   * @param  string  $password  The password to validate
+   *
+   * @return  void
    */
-  private function validate($password) {
+  private function validate($password): void {
     if(strlen($password) < $this->validationMinLength()) {
       throw new InvalidArgumentException("The password must be at least {$this->validationMinLength()} characters long");
     }
-    
+
     if(strlen($password) > $this->validationMaxLength()) {
       throw new InvalidArgumentException("The password must be no more than {$this->validationMaxLength()} characters long");
     }
   }
-  
+
   /**
    * Used for validation, the minimum length a password can be
-   * 
-   * @return  integer  The minimum password length
+   *
+   * @return  int  The minimum password length
    */
-  protected function validationMinLength() {
+  protected function validationMinLength(): int {
     return 8;
   }
-  
+
   /**
    * Used for validation, the maximum length a password can be
-   * 
-   * @return  integer  The maximum password length
+   *
+   * @return  int  The maximum password length
    */
-  protected function validationMaxLength() {
+  protected function validationMaxLength(): int {
     return 56; // BCrypt limitation
   }
-  
+
   /**
    * Converts this object to a string
-   * 
+   *
    * @return  string  A string representation of this object
    */
-  public function __toString() {
+  public function __toString(): string {
     return $this->raw;
   }
-  
+
   /**
    * Converts this object to a json encodable-form
-   * 
+   *
    * @return  string  A representation of this object suitable for encoding
    */
-  public function jsonSerialize() {
+  public function jsonSerialize(): string {
     return $this->raw;
   }
-  
+
   /**
    * Gets the raw value this object wraps
-   * 
-   * @return  boolean  The raw value this object wraps
+   *
+   * @return  string  The raw value this object wraps
    */
-  protected function getRaw() {
+  protected function getRaw(): string {
     return $this->raw;
   }
 }
