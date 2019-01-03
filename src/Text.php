@@ -1,7 +1,5 @@
 <?php declare(strict_types = 1); namespace BapCat\Values;
 
-use BapCat\Interfaces\Values\Value;
-
 use InvalidArgumentException;
 
 use function is_string;

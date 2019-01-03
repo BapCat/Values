@@ -13,7 +13,7 @@
   "require": {
     "php": ">=7.1",
     "ext-json": "*",
-    "bapcat/interfaces": "^2.0",
+    "bapcat/propifier": "2.0",
     "eloquent/enumeration": "^6.0"
   },
   "require-dev": {
