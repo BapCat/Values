@@ -1,7 +1,7 @@
 {
   "name": "bapcat/values",
   "description": "",
-  "license": "GPLv3",
+  "license": "GPL-3.0-or-later",
   "homepage": "http://github.com/BapCat/Values",
   "keywords": ["DDD", "Domain Driven", "Design", "Value Object", "Values"],
   "authors": [
