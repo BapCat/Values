@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 class UrlTest extends TestCase {
   protected $url;
 
-  protected function setUp() {
+  protected function setUp(): void {
     $this->url = 'http://bapcat.com';
   }
 

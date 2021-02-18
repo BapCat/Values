@@ -1,7 +1,6 @@
 <?php
 
 use BapCat\Values\Ip;
-use BapCat\Values\IpClass;
 use PHPUnit\Framework\TestCase;
 
 class IpTest extends TestCase {
