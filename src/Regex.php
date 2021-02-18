@@ -5,6 +5,8 @@ use InvalidArgumentException;
 /**
  * Represents a regular expression
  *
+ * @property-read  string  $raw
+ *
  * @author    Corey Frenette
  * @copyright Copyright (c) 2015, BapCat
  */

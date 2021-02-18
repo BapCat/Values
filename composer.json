@@ -2,7 +2,7 @@
   "name": "bapcat/values",
   "description": "",
   "license": "GPL-3.0-or-later",
-  "homepage": "http://github.com/BapCat/Values",
+  "homepage": "https://github.com/BapCat/Values",
   "keywords": ["DDD", "Domain Driven", "Design", "Value Object", "Values"],
   "authors": [
     {
@@ -10,15 +10,23 @@
       "email": "corey@narwhunderful.com"
     }
   ],
+  "config": {
+    "preferred-install": "dist",
+    "platform": {
+      "php": "7.4"
+    },
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
   "require": {
-    "php": ">=7.1",
+    "php": "^7.4|^8.0",
     "ext-json": "*",
-    "bapcat/propifier": "2.0",
+    "bapcat/propifier": "3.0",
     "eloquent/enumeration": "^6.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-master",
-    "phpunit/phpunit": "^7.5"
+    "phpunit/phpunit": "^9.5"
   },
   "autoload": {
     "psr-4": {
