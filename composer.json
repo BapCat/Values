@@ -12,16 +12,13 @@
   ],
   "config": {
     "preferred-install": "dist",
-    "platform": {
-      "php": "7.4"
-    },
     "optimize-autoloader": true,
     "sort-packages": true
   },
   "require": {
     "php": "^7.4|^8.0",
     "ext-json": "*",
-    "bapcat/propifier": "3.0",
+    "bapcat/propifier": "^3.0",
     "eloquent/enumeration": "^6.0"
   },
   "require-dev": {
